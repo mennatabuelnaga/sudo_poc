@@ -23,7 +23,7 @@ wasm_execute() {
 # sudo_call <SUDO_MSG>
 sudo_call() {
 
-    OUTPUT="$(wasmd tx gov submit-proposal sudo-contract $POC_CONTRACT_ADDRESS $1 --from $DEV_ACCOUNT --node $RPC_URL --gas-prices 0.025stake --gas auto --gas-adjustment 1.3 -y --output json --chain-id $CHAIN_ID)"
+    OUTPUT="$(wasmd tx wasm submit-proposal sudo-contract $POC_CONTRACT_ADDRESS $1 --from $DEV_ACCOUNT --node $RPC_URL --gas-prices 0.025stake --gas auto --gas-adjustment 1.3 -y --output json --chain-id $CHAIN_ID --title "sudo-execute"  --summary "post_results")"
     echo $OUTPUT
 
     TXHASH=$(echo "$OUTPUT" | jq -r '.txhash')
