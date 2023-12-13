@@ -11,7 +11,7 @@ done
 # wasm_execute <EXECUTE_MSG> <AMOUNT>
 wasm_execute() {
 
-    OUTPUT="$(wasmd tx wasm execute $POC_CONTRACT_ADDRESS $1 --from $DEV_ACCOUNT --node $RPC_URL --gas-prices 0.025stake --gas auto --gas-adjustment 1.3 -y --output json --chain-id $CHAIN_ID --amount "$2"stake)"
+    OUTPUT="$(seda-chaind tx wasm execute $POC_CONTRACT_ADDRESS $1 --from $DEV_ACCOUNT --keyring-backend test --node $RPC_URL --gas-prices 0.025aseda --gas auto --gas-adjustment 1.3 -y --output json --chain-id $CHAIN_ID --amount "$2"seda)"
     echo $OUTPUT
 
     TXHASH=$(echo "$OUTPUT" | jq -r '.txhash')
@@ -23,7 +23,7 @@ wasm_execute() {
 # sudo_call <SUDO_MSG>
 sudo_call() {
 
-    OUTPUT="$(wasmd tx wasm submit-proposal sudo-contract $POC_CONTRACT_ADDRESS $1 --from $DEV_ACCOUNT --node $RPC_URL --gas-prices 0.025stake --gas auto --gas-adjustment 1.3 -y --output json --chain-id $CHAIN_ID --title "sudo-execute"  --summary "post_results")"
+    OUTPUT="$(seda-chaind tx wasm submit-proposal sudo-contract $POC_CONTRACT_ADDRESS $1 --from $DEV_ACCOUNT --keyring-backend test --node $RPC_URL --gas-prices 0.025aseda --gas auto --gas-adjustment 1.3 -y --output json --chain-id $CHAIN_ID --title "sudo-execute"  --summary "post_results" --deposit "$2"seda)"
     echo $OUTPUT
 
     TXHASH=$(echo "$OUTPUT" | jq -r '.txhash')
@@ -37,7 +37,7 @@ sudo_call() {
 # wasm_query <QUERY_MSG>
 wasm_query() {
 
-    OUTPUT="$(wasmd query wasm contract-state smart $POC_CONTRACT_ADDRESS $1 --node $RPC_URL --output json --chain-id $CHAIN_ID)"
+    OUTPUT="$(seda-chaind query wasm contract-state smart $POC_CONTRACT_ADDRESS $1 --node $RPC_URL --output json --chain-id $CHAIN_ID)"
     echo $OUTPUT
 
     sleep 10

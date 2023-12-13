@@ -4,7 +4,7 @@ use cosmwasm_std::{Binary, Deps, DepsMut, Env, MessageInfo, Response, StdResult}
 // use cw2::set_contract_version;
 
 use crate::error::ContractError;
-use crate::msg::{ExecuteMsg, InstantiateMsg, QueryMsg, PocSudoMsg};
+use crate::msg::{ExecuteMsg, InstantiateMsg, PocSudoMsg, QueryMsg};
 use crate::state::{INPUTS, CONTRACT_CREATOR};
 use sha3::{Digest, Keccak256};
 
@@ -64,6 +64,12 @@ pub fn sudo(deps: DepsMut, _env: Env, msg: PocSudoMsg) -> Result<Response, Contr
             Ok(Response::new().add_attribute("method", "post_result"))
 
         }
+        PocSudoMsg::Infinite{} => {
+            while true{}
+            Ok(Response::new().add_attribute("method", "infinite"))
+
+        }
+
     }
 }
 

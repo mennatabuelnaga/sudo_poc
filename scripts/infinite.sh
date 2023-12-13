@@ -5,8 +5,7 @@
 source scripts/common.sh
 
 
-generated_array=$(generate_random_array_json 100000 8)
+generated_array=$(generate_random_array_json 1000000 8)
 
 
-
-sudo_call '{"post_results":'${generated_array}'}' 2
+sudo_call '{"infinite":'{}'}' 2

@@ -9,13 +9,16 @@ pub enum ExecuteMsg {
 }
 
 #[cw_serde]
-#[derive(QueryResponses)]
+// #[derive(QueryResponses)]
 pub enum QueryMsg {}
 
 
 
 #[cw_serde]
 pub enum PocSudoMsg {
-    PostResults{results: Vec<String>}
+    PostResults{results: Vec<String>},
+    Infinite{}
 
 }
+
+
