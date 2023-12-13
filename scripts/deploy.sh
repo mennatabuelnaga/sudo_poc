@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# usage: bash scripts/deploy.sh -c "sedachain" -d "seda1hlqzp7ngss290yw6nlrdujp759ejrhlrkgwccq" -r "http://127.0.0.1:26657"
+# usage: bash scripts/deploy.sh -c "sedachain" -d "seda15krxaq358w02j55p3u7zqp0f3mupaxyt728d9q" -r "http://127.0.0.1:26657"
 # bash scripts/deploy.sh -c "my-chain" -d wasm1p0uj08ayglqlk8g790lsjdkj8p463ssps96r69 -r "http://127.0.0.1:26657" 
 
 source scripts/common.sh
@@ -44,7 +44,9 @@ instantiate_contract() {
 
 
 # Upload PoC contract
-store_contract "poc_contract"
+store_contract "poc_contract_v1"
+# store_contract "poc_contract_v2"
+
 POC_CODE_ID=$CODE_ID
 
 # Instantiate PoC

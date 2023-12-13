@@ -1,9 +1,10 @@
-while getopts ":c:d:r:p:" opt; do  
+while getopts ":c:d:r:p:i:" opt; do  
 case $opt in
     c) CHAIN_ID=$OPTARG;;  
     d) DEV_ACCOUNT=$OPTARG;;  
     r) RPC_URL=$OPTARG;;  
     p) POC_CONTRACT_ADDRESS=$OPTARG;;  
+    i) CODE_ID=$OPTARG;;  
     *) usage  
 esac  
 done  
@@ -32,12 +33,25 @@ sudo_call() {
     sleep 10
 }
 
+# wasm_query <OLD_CONTRACT_ADDRESS> <NEW_CODE_ID> <MIGRATION_MSG>
+migrate_call() {
+    echo "address" $1
+    echo "id" $2
+    OUTPUT="$(seda-chaind tx wasm migrate $1 $2 $3 --node $RPC_URL --output json --from $DEV_ACCOUNT --keyring-backend test --node $RPC_URL --gas-prices 0.025aseda --gas auto --gas-adjustment 1.3 -y --output json --chain-id $CHAIN_ID)"
+    echo $OUTPUT
+
+    sleep 10
+}
+
+
+
+
 
 
 # wasm_query <QUERY_MSG>
 wasm_query() {
 
-    OUTPUT="$(seda-chaind query wasm contract-state smart $POC_CONTRACT_ADDRESS $1 --node $RPC_URL --output json --chain-id $CHAIN_ID)"
+    OUTPUT="$(seda-chaind query wasm contract-state smart $POC_CONTRACT_ADDRESS $1 --node $RPC_URL --output json)"
     echo $OUTPUT
 
     sleep 10
