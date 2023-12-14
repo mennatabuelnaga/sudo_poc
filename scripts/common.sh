@@ -33,7 +33,7 @@ sudo_call() {
     sleep 10
 }
 
-# wasm_query <OLD_CONTRACT_ADDRESS> <NEW_CODE_ID> <MIGRATION_MSG>
+# migrate_call <OLD_CONTRACT_ADDRESS> <NEW_CODE_ID> <MIGRATION_MSG>
 migrate_call() {
     echo "address" $1
     echo "id" $2
@@ -48,8 +48,8 @@ migrate_call() {
 
 
 
-# wasm_query <QUERY_MSG>
-wasm_query() {
+# smart_query <QUERY_MSG>
+smart_query() {
 
     OUTPUT="$(seda-chaind query wasm contract-state smart $POC_CONTRACT_ADDRESS $1 --node $RPC_URL --output json)"
     echo $OUTPUT
@@ -57,7 +57,14 @@ wasm_query() {
     sleep 10
 }
 
+# raw_query
+raw_query_contract() {
 
+    OUTPUT="$(seda-chaind query wasm contract-state raw $POC_CONTRACT_ADDRESS 636F6E74726163745F696E666F --node $RPC_URL --output json | jq  -r .data | base64 -d | jq)"
+    echo $OUTPUT
+
+    sleep 10
+}
 
 
 

@@ -6,4 +6,4 @@
 source scripts/common.sh
 
 
-wasm_query '{"get_state_keys":{}}'
+smart_query '{"get_state_keys":{}}'
