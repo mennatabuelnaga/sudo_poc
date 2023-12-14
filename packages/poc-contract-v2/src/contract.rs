@@ -3,7 +3,8 @@ use cosmwasm_std::entry_point;
 use cosmwasm_std::{Binary, Deps, DepsMut, Env, MessageInfo, Response, StdResult, to_json_binary, Empty};
 use cw2::set_contract_version;
 // use cw2::set_contract_version;
-
+use cw2::get_contract_version;
+use crate::msg::GetVersionResponse;
 use crate::error::ContractError;
 use crate::migrations;
 use crate::msg::{ExecuteMsg, InstantiateMsg, PocSudoMsg, QueryMsg, GetStateSizeResponse, GetStateKeysResponse, MigrateMsg, GetMigrationMsgResponse};
@@ -68,6 +69,12 @@ pub fn query(deps: Deps, _env: Env, msg: QueryMsg) -> StdResult<Binary> {
     },
     QueryMsg::GetMigrationMsg {  } => {
         let res = GetMigrationMsgResponse{msg: "Successful Migration!!".to_string()};
+        Ok(to_json_binary(&res).unwrap())
+
+
+    },
+    QueryMsg::GetVersion {  } => {
+        let res: GetVersionResponse = GetVersionResponse{version: get_contract_version(deps.storage)?};
         Ok(to_json_binary(&res).unwrap())
 
 

@@ -1,9 +1,9 @@
 #[cfg(not(feature = "library"))]
 use cosmwasm_std::entry_point;
 use cosmwasm_std::{Binary, Deps, DepsMut, Env, MessageInfo, Response, StdResult, to_json_binary, Empty};
-use cw2::set_contract_version;
+use cw2::{set_contract_version, get_contract_version};
 // use cw2::set_contract_version;
-
+use crate::msg::GetVersionResponse;
 use crate::error::ContractError;
 use crate::migrations;
 use crate::msg::{ExecuteMsg, InstantiateMsg, PocSudoMsg, QueryMsg, GetStateSizeResponse, GetStateKeysResponse, MigrateMsg};
@@ -66,6 +66,13 @@ pub fn query(deps: Deps, _env: Env, msg: QueryMsg) -> StdResult<Binary> {
         Ok(to_json_binary(&res).unwrap())
         
     },
+    QueryMsg::GetVersion {  } => {
+        let res: GetVersionResponse = GetVersionResponse{version: get_contract_version(deps.storage)?};
+        Ok(to_json_binary(&res).unwrap())
+
+
+    }
+
 }
 }
 
@@ -99,7 +106,7 @@ pub fn sudo(deps: DepsMut, _env: Env, msg: PocSudoMsg) -> Result<Response, Contr
 #[cfg_attr(not(feature = "library"), entry_point)]
 pub fn migrate(deps: DepsMut, _env: Env, msg: MigrateMsg) -> Result<Response, ContractError> {
     match msg {
-        MigrateMsg::V1_0_0_to_V2_0_0 {  } => {
+        MigrateMsg::V1_0_0ToV2_0_0 {  } => {
             migrations::v2_0_0::migrate(deps)
 
         }

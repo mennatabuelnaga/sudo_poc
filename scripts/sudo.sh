@@ -1,4 +1,4 @@
-# usage: bash scripts/sudo.sh -c "sedachain" -d "seda1hlqzp7ngss290yw6nlrdujp759ejrhlrkgwccq" -r "http://127.0.0.1:26657" -p seda14hj2tavq8fpesdwxxcu44rty3hh90vhujrvcmstl4zr3txmfvw9snnh0yy
+# usage: bash scripts/sudo.sh -c "sedachain" -d "seda1hlqzp7ngss290yw6nlrdujp759ejrhlrkgwccq" -r "http://127.0.0.1:26657" -p seda1qg5ega6dykkxc307y25pecuufrjkxkaggkkxh7nad0vhyhtuhw3suc9lqj
 
 
 

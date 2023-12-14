@@ -1,4 +1,5 @@
 use cosmwasm_schema::{cw_serde, QueryResponses};
+use cw2::ContractVersion;
 
 #[cw_serde]
 pub struct InstantiateMsg {}
@@ -19,7 +20,12 @@ pub enum QueryMsg {
     GetStateSize{},
 
     #[returns(GetStateKeysResponse)]
-    GetStateKeys{}
+    GetStateKeys{},
+
+    #[returns(GetVersionResponse)]
+    GetVersion{}
+
+
 
 }
 
@@ -46,6 +52,12 @@ pub struct GetStateSizeResponse{
 
 #[cw_serde]
 
+pub struct GetVersionResponse{
+    pub version: ContractVersion
+}
+
+#[cw_serde]
+
 pub struct GetStateKeysResponse{
     pub keys: Vec<String>
 }
@@ -60,5 +72,5 @@ pub struct GetStateKeysResponse{
 
 #[cw_serde]
 pub enum MigrateMsg {
-    V1_0_0_to_V2_0_0{},
+    V1_0_0ToV2_0_0{},
 }

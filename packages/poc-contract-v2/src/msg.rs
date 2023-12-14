@@ -1,4 +1,5 @@
 use cosmwasm_schema::{cw_serde, QueryResponses};
+use cw2::ContractVersion;
 
 #[cw_serde]
 pub struct InstantiateMsg {}
@@ -22,8 +23,16 @@ pub enum QueryMsg {
     GetStateKeys{},
 
     #[returns(GetMigrationMsgResponse)]
-    GetMigrationMsg{}
+    GetMigrationMsg{},
 
+    #[returns(GetVersionResponse)]
+    GetVersion{}
+
+}
+#[cw_serde]
+
+pub struct GetVersionResponse{
+    pub version: ContractVersion
 }
 
 
@@ -64,3 +73,4 @@ pub enum MigrateMsg {
 pub struct GetMigrationMsgResponse{
     pub msg: String
 }
+
