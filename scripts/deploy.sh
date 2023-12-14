@@ -25,7 +25,7 @@ store_contract(){
 # instantiate_contract CODE_ID INSTANTIATE_MSG LABEL
 instantiate_contract() {
 
-    OUTPUT=$(seda-chaind tx wasm instantiate $1 $2 --no-admin --from $DEV_ACCOUNT  --keyring-backend test --node $RPC_URL --label "$3$1" --gas-prices 0.025aseda --gas auto --gas-adjustment 2 -y --output json --chain-id $CHAIN_ID)
+    OUTPUT=$(seda-chaind tx wasm instantiate $1 $2 --from $DEV_ACCOUNT  --admin $DEV_ACCOUNT --keyring-backend test --node $RPC_URL --label "$3$1" --gas-prices 0.025aseda --gas auto --gas-adjustment 2 -y --output json --chain-id $CHAIN_ID)
     echo $OUTPUT
 
     TXHASH=$(echo "$OUTPUT" | jq -r '.txhash')

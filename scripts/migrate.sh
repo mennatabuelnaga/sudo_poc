@@ -6,4 +6,4 @@
 source scripts/common.sh
 
 
-migrate_call $POC_CONTRACT_ADDRESS $CODE_ID '{"migrate":{}}'
+migrate_call $POC_CONTRACT_ADDRESS $CODE_ID '{"v1_0_0_to_v2_0_0":{}}'

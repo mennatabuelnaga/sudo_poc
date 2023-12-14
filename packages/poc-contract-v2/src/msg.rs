@@ -7,10 +7,7 @@ pub struct InstantiateMsg {}
 #[cw_serde]
 pub enum ExecuteMsg {
     PostResults{results: Vec<String>},
-    // //--------------------------------------------------------------------------------------------------
-    // // Migrate message to work in batches
-    // //--------------------------------------------------------------------------------------------------
-    // Migrate(MigrateV1ToV2),
+    
 }
 
 #[cw_serde]
@@ -41,11 +38,7 @@ pub struct GetVersionResponse{
 pub enum PocSudoMsg {
     PostResults{results: Vec<String>},
     Infinite{},
-    // //--------------------------------------------------------------------------------------------------
-    // // Migrate message to work in batches
-    // //--------------------------------------------------------------------------------------------------
-    // Migrate(MigrateV1ToV2),
-
+   
 }
 
 
@@ -65,7 +58,7 @@ pub struct GetStateKeysResponse{
 
 #[cw_serde]
 pub enum MigrateMsg {
-    V2_0_0ToV3_0_0{},
+    V1_0_0ToV2_0_0{},
 }
 
 #[cw_serde]

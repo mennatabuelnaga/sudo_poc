@@ -5,13 +5,13 @@ use cw2::{set_contract_version, get_contract_version};
 // use cw2::set_contract_version;
 use crate::msg::GetVersionResponse;
 use crate::error::ContractError;
-use crate::migrations;
+// use crate::migrations;
 use crate::msg::{ExecuteMsg, InstantiateMsg, PocSudoMsg, QueryMsg, GetStateSizeResponse, GetStateKeysResponse, MigrateMsg};
 use crate::state::{CONTRACT_CREATOR, STATE};
 use sha3::{Digest, Keccak256};
 
 // version info
-pub const CONTRACT_NAME: &str = "migration-poc";
+pub const CONTRACT_NAME: &str = "crates.io:migration-poc";
 pub const CONTRACT_VERSION: &str = env!("CARGO_PKG_VERSION");
 
 #[cfg_attr(not(feature = "library"), entry_point)]
@@ -104,13 +104,14 @@ pub fn sudo(deps: DepsMut, _env: Env, msg: PocSudoMsg) -> Result<Response, Contr
 
 
 #[cfg_attr(not(feature = "library"), entry_point)]
-pub fn migrate(deps: DepsMut, _env: Env, msg: MigrateMsg) -> Result<Response, ContractError> {
-    match msg {
-        MigrateMsg::V1_0_0ToV2_0_0 {  } => {
-            migrations::v2_0_0::migrate(deps)
+pub fn migrate(deps: DepsMut, _env: Env, _msg: MigrateMsg) -> Result<Response, ContractError> {
+    // match msg {
+    //     MigrateMsg::V1_0_0ToV2_0_0 {  } => {
+    //         migrations::v2_0_0::migrate(deps)
 
-        }
-    }
+    //     }
+    // }
+    Ok(Response::new().add_attribute("method", "migrate"))
 }
 
 

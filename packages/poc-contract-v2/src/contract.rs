@@ -12,7 +12,7 @@ use crate::state::{CONTRACT_CREATOR, STATE};
 use sha3::{Digest, Keccak256};
 
 // version info
-pub const CONTRACT_NAME: &str = env!("CARGO_PKG_NAME");
+pub const CONTRACT_NAME: &str = "crates.io:migration-poc";
 pub const CONTRACT_VERSION: &str = env!("CARGO_PKG_VERSION");
 
 #[cfg_attr(not(feature = "library"), entry_point)]
@@ -113,8 +113,8 @@ pub fn sudo(deps: DepsMut, _env: Env, msg: PocSudoMsg) -> Result<Response, Contr
 #[cfg_attr(not(feature = "library"), entry_point)]
 pub fn migrate(deps: DepsMut, _env: Env, msg: MigrateMsg) -> Result<Response, ContractError> {
     match msg {
-        MigrateMsg::V2_0_0ToV3_0_0 {  } => {
-            migrations::v3_0_0::migrate(deps)
+        MigrateMsg::V1_0_0ToV2_0_0 {  } => {
+            migrations::v2_0_0::migrate(deps)
 
         }
     }
