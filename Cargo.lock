@@ -360,7 +360,8 @@ dependencies = [
 [[package]]
 name = "cw721"
 version = "0.18.0"
-source = "git+https://github.com/CosmWasm/cw-nfts/?branch=main#588868d74bda898fe4b93ddbb3a74b74e94ca948"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e3c4d286625ccadc957fe480dd3bdc54ada19e0e6b5b9325379db3130569e914"
 dependencies = [
  "cosmwasm-schema",
  "cosmwasm-std",
@@ -389,7 +390,8 @@ dependencies = [
 [[package]]
 name = "cw721-base"
 version = "0.18.0"
-source = "git+https://github.com/CosmWasm/cw-nfts/?branch=main#588868d74bda898fe4b93ddbb3a74b74e94ca948"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "da518d9f68bfda7d972cbaca2e8fcf04651d0edc3de72b04ae2bcd9289c81614"
 dependencies = [
  "cosmwasm-schema",
  "cosmwasm-std",

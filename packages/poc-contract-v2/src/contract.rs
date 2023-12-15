@@ -4,11 +4,12 @@ use cosmwasm_std::{Binary, Deps, DepsMut, Env, MessageInfo, Response, StdResult,
 use cw2::set_contract_version;
 // use cw2::set_contract_version;
 use cw2::get_contract_version;
+use cw721_base::msg;
 use crate::msg::GetVersionResponse;
 use crate::error::ContractError;
 use crate::migrations;
 use crate::msg::{ExecuteMsg, InstantiateMsg, PocSudoMsg, QueryMsg, GetStateSizeResponse, GetStateKeysResponse, MigrateMsg, GetMigrationMsgResponse};
-use crate::state::{CONTRACT_CREATOR, STATE};
+use crate::state::STATE;
 use sha3::{Digest, Keccak256};
 
 // version info
@@ -19,12 +20,11 @@ pub const CONTRACT_VERSION: &str = env!("CARGO_PKG_VERSION");
 pub fn instantiate(
     deps: DepsMut,
     _env: Env,
-    info: MessageInfo,
+    _info: MessageInfo,
     _msg: InstantiateMsg,
 ) -> Result<Response, ContractError> {
     set_contract_version(deps.storage, CONTRACT_NAME, CONTRACT_VERSION)?;
 
-    CONTRACT_CREATOR.save(deps.storage, &info.sender)?;
     Ok(Response::new().add_attribute("method", "instantiate"))
 
 
@@ -112,12 +112,12 @@ pub fn sudo(deps: DepsMut, _env: Env, msg: PocSudoMsg) -> Result<Response, Contr
 
 #[cfg_attr(not(feature = "library"), entry_point)]
 pub fn migrate(deps: DepsMut, _env: Env, msg: MigrateMsg) -> Result<Response, ContractError> {
-    match msg {
-        MigrateMsg::V1_0_0ToV2_0_0 {  } => {
-            migrations::v2_0_0::migrate(deps)
-
-        }
+    
+    if msg.target_version == "2.0.0" {
+        migrations::v2_0_0::migrate(deps)?;
     }
+    Ok(Response::new().add_attribute("action", "migrate").add_attribute("to_version", msg.target_version))
+
 }
 
 pub fn hash_string(input: String) -> String {

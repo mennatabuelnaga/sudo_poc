@@ -56,10 +56,10 @@ pub struct GetStateKeysResponse{
 }
 
 
-#[cw_serde]
-pub enum MigrateMsg {
-    V1_0_0ToV2_0_0{},
-}
+// #[cw_serde]
+// pub enum MigrateMsg {
+//     V1_0_0ToV2_0_0{},
+// }
 
 #[cw_serde]
 
@@ -67,3 +67,9 @@ pub struct GetMigrationMsgResponse{
     pub msg: String
 }
 
+#[cw_serde]
+
+pub struct MigrateMsg {
+    /// Specify the version that we are migrating up to
+    pub target_version: String,
+}

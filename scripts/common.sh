@@ -37,6 +37,7 @@ sudo_call() {
 migrate_call() {
     echo "address" $1
     echo "id" $2
+    echo "msg" $3
     OUTPUT="$(seda-chaind tx wasm migrate $1 $2 $3 --node $RPC_URL --output json --from $DEV_ACCOUNT --keyring-backend test --node $RPC_URL --gas-prices 0.025aseda --gas auto --gas-adjustment 1.3 -y --output json --chain-id $CHAIN_ID)"
     echo $OUTPUT
 

@@ -1,13 +1,13 @@
 use std::borrow::BorrowMut;
 
 use cosmwasm_std::{
-    DepsMut, Empty, Response
+    DepsMut, Empty, Response, Addr
 };
 use cw2::set_contract_version;
 
 use crate::{
     contract::{CONTRACT_NAME, CONTRACT_VERSION},
-    error::ContractError::{self}, state::{STATE, CONTRACT_CREATOR},
+    error::ContractError::{self}, state::STATE,
 };
 
 
@@ -18,7 +18,6 @@ pub mod v1_state {
     use cw_storage_plus::{Item, Map};
 
     /// The creator of the contract who can set the initial contract addresses. After that, only sudo can change them.
-    pub const CONTRACT_CREATOR: Item<Addr> = Item::new("contract_creator");
 
     pub const STATE: Map<String, String> = Map::new("inputs");
 
@@ -40,12 +39,7 @@ pub fn migrate(deps: DepsMut) -> Result<Response, ContractError> {
     v1_state::STATE.clear(deps.storage);
 
     
-    let old_creator = v1_state::CONTRACT_CREATOR.load(deps.as_ref().storage)?; 
-
-    // migrate creator
-    CONTRACT_CREATOR.save(deps.storage, &old_creator)?;
-    v1_state::CONTRACT_CREATOR.remove(deps.storage);
-
+   
 
     // migrate version
     set_contract_version(deps.storage, format!("{CONTRACT_NAME}"), "2.0.0")?;

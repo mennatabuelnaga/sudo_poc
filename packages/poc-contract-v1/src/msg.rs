@@ -70,7 +70,7 @@ pub struct GetStateKeysResponse{
 //     },
 // }
 
-#[cw_serde]
-pub enum MigrateMsg {
-    V1_0_0ToV2_0_0{},
-}
+// #[cw_serde]
+// pub enum MigrateMsg {
+//     V1_0_0ToV2_0_0{},
+// }
